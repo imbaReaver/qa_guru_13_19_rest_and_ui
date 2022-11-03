@@ -1,6 +1,6 @@
-package cloud.autotests.helpers;
+package guru.qa.helpers;
 
-import cloud.autotests.config.Project;
+import guru.qa.config.Project;
 import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

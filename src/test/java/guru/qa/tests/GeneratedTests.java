@@ -1,12 +1,12 @@
-package cloud.autotests.tests.demowebshop;
+package guru.qa.tests;
 
-import cloud.autotests.config.demowebshop.App;
-import cloud.autotests.helpers.AllureRestAssuredFilter;
-import cloud.autotests.tests.TestBase;
 import com.codeborne.selenide.Configuration;
-import io.qameta.allure.Story;
+import guru.qa.config.Project;
+import guru.qa.helpers.CustomApiListener;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Condition.text;
@@ -16,24 +16,28 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
-@Story("Login tests")
-public class LoginTests extends TestBase {
 
+public class GeneratedTests extends TestBase {
     static String login,
             password;
 
     @BeforeAll
     static void configureBaseUrl() {
-        RestAssured.baseURI = App.config.apiUrl();
-        Configuration.baseUrl = App.config.webUrl();
+        RestAssured.baseURI = Project.config.apiUrl();
+        Configuration.baseUrl = Project.config.webUrl();
 
-        login = App.config.userLogin();
-        password = App.config.userPassword();
+        login = Project.config.userLogin();
+        password = Project.config.userPassword();
     }
 
     @Test
-    @Tag("demowebshop")
-    @Disabled("Example test code for further test development")
+    @DisplayName("Test")
+    void generatedTest() {
+        step("Open url", () ->
+                open(Project.config.webUrl()));
+    }
+
+    @Test
     @DisplayName("Successful authorization to some demowebshop (UI)")
     void loginTest() {
         step("Open login page", () ->
@@ -50,14 +54,12 @@ public class LoginTests extends TestBase {
     }
 
     @Test
-    @Tag("demowebshop")
-    @Disabled("Example test code for further test development")
     @DisplayName("Successful authorization to some demowebshop (API + UI)")
     void loginWithCookieTest() {
         step("Get cookie by api and set it to browser", () -> {
             String authorizationCookie =
                     given()
-                            .filter(AllureRestAssuredFilter.withCustomTemplates())
+                            .filter(CustomApiListener.withCustomTemplates())
                             .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                             .formParam("Email", login)
                             .formParam("Password", password)
@@ -82,4 +84,5 @@ public class LoginTests extends TestBase {
         step("Verify successful authorization", () ->
                 $(".account").shouldHave(text(login)));
     }
+
 }

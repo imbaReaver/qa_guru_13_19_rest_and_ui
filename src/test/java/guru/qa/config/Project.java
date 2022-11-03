@@ -1,4 +1,4 @@
-package cloud.autotests.config;
+package guru.qa.config;
 
 import org.aeonbits.owner.ConfigFactory;
 
