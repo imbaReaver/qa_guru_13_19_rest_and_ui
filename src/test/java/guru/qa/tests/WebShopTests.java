@@ -25,7 +25,6 @@ public class WebShopTests extends TestBase {
     }
 
     @Test
-    @Disabled
     @DisplayName("User registration test")
     void registrationTest() {
         step("Fill and check registration form (API)", () ->
